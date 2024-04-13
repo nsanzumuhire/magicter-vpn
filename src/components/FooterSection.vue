@@ -1,0 +1,39 @@
+<template>
+    <div class="bg-white-300 w-full py-12 xl:absolute xl:bottom-0">
+      <div class="max-w-screen-xl w-full mx-auto px-6 sm:px-8 lg:px-16 grid  sm:grid-rows-1 gap-4">
+        <div class=" text-smrow-span-2 sm:col-span-4 col-start-1 col-end-4 sm:col-end-5 flex flex-col items-start w-full">
+          <img src="../assets/Logo.svg" class="h-8 w-auto mb-6" />
+          <p class="mb-4 w-1/3">
+            <strong class="font-medium text-sm">MagitecterVPN</strong> is a private virtual network that has unique features and has high security.
+          </p>
+          <div class="flex divide-x divide-gray-500 space-x-2 py-1 w-full">
+            <a class="text-sm text-black-500 cursor-pointer hover:underline">Terms of use</a>
+            <a class="text-sm pl-2 text-black-500  cursor-pointer hover:underline">Privacy policy</a>
+            <a class="text-sm pl-2 text-black-500  cursor-pointer hover:underline">info@magicter.com</a>
+          </div>
+
+          <div class="flex w-full mt-2 mb-8 -mx-2 text-sm">
+            <div class="mx-2 bg-white-500 rounded-full items-center justify-center flex p-2 shadow-md">
+              <img src="../assets/Icon/facebook.svg" class="h-6 w-6" />
+            </div>
+            <div class="mx-2 bg-white-500 rounded-full items-center justify-center flex p-2 shadow-md">
+                <img src="../assets/Icon/twitter.svg" class="h-6 w-6" />
+            </div>
+            <div class="mx-2 bg-white-500 rounded-full items-center justify-center flex p-2 shadow-md">
+                <img src="../assets/Icon/instagram.svg" class="h-6 w-6" />
+            </div>
+          </div>
+          <p class="text-gray-400 text-sm">©{{ new Date().getFullYear() }} - MagitecterVPN</p>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+
+  
+  export default {
+    components: {
+    },
+  };
+  </script>
