@@ -3,7 +3,7 @@
       <div class="max-w-screen-xl w-full mx-auto px-6 sm:px-8 lg:px-16 grid  sm:grid-rows-1 gap-4">
         <div class=" text-smrow-span-2 sm:col-span-4 col-start-1 col-end-4 sm:col-end-5 flex flex-col items-start w-full">
           <img src="../assets/Logo.svg" class="h-8 w-auto mb-6" />
-          <p class="mb-4 w-1/3">
+          <p class="mb-4 w-1/3 hidden lg:flex">
             <strong class="font-medium text-sm">MagitecterVPN</strong> is a private virtual network that has unique features and has high security.
           </p>
           <div class="flex divide-x divide-gray-500 space-x-2 py-1 w-full">
