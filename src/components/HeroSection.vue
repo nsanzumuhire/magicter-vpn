@@ -5,7 +5,7 @@
           class="grid grid-flow-row sm:grid-flow-col grid-rows-2 md:grid-rows-1 sm:grid-cols-2 gap-8 pb-24"
         >
           <div class="flex flex-col justify-center items-start row-start-2 sm:row-start-1">
-            <h1 class="text-2xl lg:text-3xl xl:text-4xl font-medium text-black-600 leading-normal">
+            <h1 class="text-2xl lg:text-3xl xl:text-4xl font-medium text-black-500 leading-normal">
               Experience Lightning-Fast & Secure  <strong>VPN</strong>.
             </h1>
             <p class="text-black-500 mt-4 mb-6 text-sm">
