@@ -19,6 +19,8 @@ const routes = [
       { path: 'signup', component: () => import('./pages/auth/SignupPage.vue') },
       { path: 'forget-password', component: () => import('./pages/auth/ForgetPwdPage.vue') },
       { path: 'reset-password', component: () => import('./pages/auth/ResetPwdPage.vue') },
+      { path: 'confirm-signin', component: () => import('./pages/auth/confirmSigninPage.vue') },
+      { path: 'success', component: () => import('./pages/auth/EmailMessagePage.vue') },
     ],
   },
   {
