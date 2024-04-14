@@ -6,7 +6,7 @@
         >
           <div class="flex flex-col justify-center items-start row-start-2 sm:row-start-1">
             <h1 class="text-2xl lg:text-3xl xl:text-4xl font-medium text-black-600 leading-normal">
-              Experience Lightning-Fast  <strong>VPN</strong>.
+              Experience Lightning-Fast & Secure  <strong>VPN</strong>.
             </h1>
             <p class="text-black-500 mt-4 mb-6 text-sm">
               Unlock blazing speeds, unbreakable privacy, and global access with our advanced VPN technology. Stream, download, and browse without limits while being protected by military-grade encryption and a strict no-logs policy.  Download our intuitive apps for your platform below and experience the difference today!

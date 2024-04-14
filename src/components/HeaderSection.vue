@@ -7,10 +7,10 @@
         <h2 class="text-black-500 text-lg font-extrabold">Magicter <span class="text-purple-500">VPN</span></h2>
       </div>
       <div class="col-start-10 col-end-12 font-medium flex justify-end items-center text-sm">
-        <router-link to="/signin" class="cursor-pointer text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-purple-500 font-bold transition-all">
+        <router-link to="/auth/signin" class="cursor-pointer text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-purple-500 font-bold transition-all">
           Sign In
         </router-link>
-        <ButtonPrimary :classes="defaultBtnFont">Sign Up</ButtonPrimary>
+        <ButtonPrimary :link="'/auth/signup'" :classes="defaultBtnFont">Sign Up</ButtonPrimary>
       </div>
     </nav>
   </header>
