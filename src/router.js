@@ -20,6 +20,7 @@ const routes = [
       { path: 'forget-password', component: () => import('./pages/auth/ForgetPwdPage.vue') },
       { path: 'reset-password', component: () => import('./pages/auth/ResetPwdPage.vue') },
       { path: 'confirm-signin', component: () => import('./pages/auth/confirmSigninPage.vue') },
+      { path: 'verify', component: () => import('./pages/auth/verifyCodePage.vue') },
       { path: 'success', component: () => import('./pages/auth/EmailMessagePage.vue') },
     ],
   },

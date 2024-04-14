@@ -12,5 +12,4 @@
     classes: String,
     link: String
   });
-  console.log(props.classes);
   </script>

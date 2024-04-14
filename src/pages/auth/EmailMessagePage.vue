@@ -25,7 +25,6 @@
         const pwd = ''
         const pickedColor = ['#006d77', '#132a13', '#31572c','#4f772d', '#0081a7', '#264653', '#780000', '#003049', '#14213d', '#023e8a', '#1b263b', '#005f73', '#bb3e03', '#ae2012', '#ae2012', '#0077b6', '#2b2d42', '#0077b6', '#ef233c', '#d90429'][Math.floor(Math.random() * (20 - 0 + 1)) + 0]
     
-        console.log(pickedColor)
         return {
             email,
             pwd,
