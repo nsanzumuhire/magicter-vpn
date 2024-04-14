@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import AdminLayout from './layouts/AdminLayout.vue';
 import AuthLayout from './layouts/AuthLayout.vue';
 import DownloadPage from './pages/DownloadPage.vue';
+import { useRouterStore } from './stores/router.state';
 
 const routes = [
   {
@@ -29,12 +30,28 @@ const routes = [
     component: AdminLayout,
     meta: { requiresAuth: true },
     children: [
-      { path: '', component: () => import('./pages/dashboard/OverviewPage.vue') },
-      { path: 'top-up-center', component: () => import('./pages/dashboard/TopUpCenterPage.vue') },
-      { path: 'planning-center', component: () => import('./pages/dashboard/PlanningCenter.vue') },
-      { path: 'managment', component: () => import('./pages/dashboard/ManagmentPage.vue') },
-      { path: 'marketing', component: () => import('./pages/dashboard/MarketingCenter.vue') },
-      { path: 'faq', component: () => import('./pages/dashboard/FaqPage.vue') },
+      { path: '', name: 'Overview', component: () => import('./pages/dashboard/OverviewPage.vue') },
+      {
+        path: 'top-up-center',
+        name: 'Top-up center',
+        component: () => import('./pages/dashboard/TopUpCenterPage.vue'),
+      },
+      {
+        path: 'planning-center',
+        name: 'Planning center',
+        component: () => import('./pages/dashboard/PlanningCenter.vue'),
+      },
+      {
+        path: 'managment',
+        name: 'Managment board',
+        component: () => import('./pages/dashboard/ManagmentPage.vue'),
+      },
+      {
+        path: 'marketing',
+        name: 'Marketing center',
+        component: () => import('./pages/dashboard/MarketingCenter.vue'),
+      },
+      { path: 'faq', name: 'FAQs', component: () => import('./pages/dashboard/FaqPage.vue') },
     ],
   },
 ];
@@ -42,6 +59,11 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.afterEach(to => {
+  const routerStore = useRouterStore();
+  routerStore.setCurrentPageName(to.name);
 });
 
 export default router;

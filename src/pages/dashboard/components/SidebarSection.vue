@@ -51,7 +51,7 @@
 
 <script>
 
-import { HomeIcon, CreditCardIcon, ClipboardDocumentIcon, BanknotesIcon, CalendarDaysIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
+import { HomeIcon, CreditCardIcon, ClipboardDocumentIcon, BanknotesIcon, CalendarDaysIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline';
 export default {
     components: {
         HomeIcon, 
