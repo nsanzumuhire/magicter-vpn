@@ -29,6 +29,7 @@ const routes = [
     component: AdminLayout,
     meta: { requiresAuth: true },
     children: [
+      { path: '', component: () => import('./pages/dashboard/OverviewPage.vue') },
       { path: 'top-up-center', component: () => import('./pages/dashboard/TopUpCenterPage.vue') },
       { path: 'planning-center', component: () => import('./pages/dashboard/PlanningCenter.vue') },
       { path: 'managment', component: () => import('./pages/dashboard/ManagmentPage.vue') },
