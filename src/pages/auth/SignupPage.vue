@@ -25,7 +25,7 @@
 
             <div class="flex flex-col w-full items-center justify-center">
                 <p class="text-xs text-black-100">
-                    By signing up, you agree with our <span class="underline">terms of service</span> and <span class="underline">privacy policy</span>. You’ll be able to change notification settings for marketing emails in your Nord Account.
+                    By signing up, you agree with our <span class="underline">terms of service</span> and <span class="underline">privacy policy</span>.
                 </p>
             </div>
         </div>
