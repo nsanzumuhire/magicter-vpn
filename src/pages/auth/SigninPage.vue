@@ -4,7 +4,7 @@
         <p class="text-sm">Don't have an account? <router-link class="text-purple-500 font-bold" to="/auth/signup">Sign up</router-link></p>
         <form action="" class="w-full flex flex-col gap-3 text-sm">
             <InputDefault v-model="email" :type="'text'" :placeholder="'Enter your email address '"/> 
-            <ButtonPrimary :link="''">Continue</ButtonPrimary> 
+            <ButtonPrimary :link="''" @click="saveEmail">Continue</ButtonPrimary> 
         </form>
         <router-link class="text-purple-500 font-bold text-sm -mt-2" to="/auth/forget-password">Forgot your password?</router-link>
 
@@ -25,24 +25,36 @@
     </div>
 </template>
 
-<script>
-import ButtonPrimary from '../../molecules/ButtonPrimary.vue';
-import ButtonOutline from '../../molecules/ButtonOutline.vue'
-import InputDefault from '../../molecules/InputDefault.vue';
+<script setup>
+    import { ref, onMounted  } from 'vue'
+    import ButtonPrimary from '../../molecules/ButtonPrimary.vue';
+    import ButtonOutline from '../../molecules/ButtonOutline.vue'
+    import InputDefault from '../../molecules/InputDefault.vue';
+    import { useAuth } from '@/composables/useAuth'; 
+    import { useRouter } from 'vue-router';
 
-export default {
-  components: {
-    ButtonPrimary,
-    ButtonOutline,
-    InputDefault
-  },
+    const router = useRouter() 
+    const { token, removeToken, setStorage } = useAuth();
+    
 
-  setup() {
-    const email = ''
+    const email = ref('');
 
-    return {
-        email
+
+    function deleteToken() {
+        if (token !== null || !token) {
+            removeToken()
+        }
     }
-  }
-}
+
+    function saveEmail() {
+        if (email.value) {
+            setStorage('email', email.value)
+            router.push('/auth/confirm-signin')
+        }
+    }
+
+    onMounted(() => {
+        deleteToken()
+    })
+
 </script>
