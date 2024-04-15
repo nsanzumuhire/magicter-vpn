@@ -1,7 +1,7 @@
 <template>
         <div class="flex w-full relative overflow-x-hidden">
             <SidebarSection/>
-            <div class="flex flex-col min-h-screen h-auto relative w-full bg-white-300 px-6 py-6">
+            <div class="flex flex-col h-fit min-h-screen relative w-full bg-white-300 px-6 py-6">
                 <AdminHeaderSection/>
                 <router-view />
                 <FooterSmallSection/>
