@@ -16,12 +16,23 @@
    
 </template>
 
-<script>
-import FooterSmallSection from '../components/FooterSmallSection.vue'
-export default {
-    components: {
-        FooterSmallSection
+<script setup>
+    import { onMounted  } from 'vue'
+    import { useAuth } from '@/composables/useAuth'; 
+    import FooterSmallSection from '@/components/FooterSmallSection.vue'
+    const { token, removeToken, removeStorage } = useAuth();
+    
+
+    function deleteToken() {
+        if (token !== null || !token) {
+            removeToken()
+        }
     }
-}
+
+
+    onMounted(() => {
+        deleteToken()
+        removeStorage('user')
+    })
 
 </script>

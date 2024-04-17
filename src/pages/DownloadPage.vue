@@ -28,6 +28,7 @@
       FooterSection
     },
     setup() {
+      
     }
   };
   </script>
