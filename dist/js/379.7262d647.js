@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkmagicter_vpn"]=self["webpackChunkmagicter_vpn"]||[]).push([[379],{9379:function(n,e,r){r.r(e),r.d(e,{default:function(){return p}});var t=r(6768);function u(n,e){return(0,t.uX)(),(0,t.CE)("span",null," Marketing center page ")}var a=r(1241);const c={},i=(0,a.A)(c,[["render",u]]);var p=i}}]);
+//# sourceMappingURL=379.7262d647.js.map
