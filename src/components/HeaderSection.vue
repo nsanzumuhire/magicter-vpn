@@ -7,10 +7,17 @@
         <h2 class="text-black-500 text-lg font-extrabold">Magicter <span class="text-purple-500">VPN</span></h2>
       </div>
       <div class="col-start-10 col-end-12 font-medium flex justify-end items-center text-sm">
-        <router-link to="/auth/signin" class="cursor-pointer text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-purple-500 font-bold transition-all">
-          Sign In
+          <template v-if="!token">
+            <router-link to="/auth/signin" class="cursor-pointer text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-purple-500 font-bold transition-all">
+            Sign In
+          </router-link>
+          <ButtonPrimary :link="'/auth/signup'" :classes="defaultBtnFont">Sign Up</ButtonPrimary>
+        </template>
+        <router-link v-else to="/account" class="cursor-pointer"> 
+          <EmailDisplay  :email="user_name"></EmailDisplay>
         </router-link>
-        <ButtonPrimary :link="'/auth/signup'" :classes="defaultBtnFont">Sign Up</ButtonPrimary>
+ 
+
       </div>
     </nav>
   </header>
@@ -38,36 +45,27 @@
     </div>
   </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from 'vue';
-
-// import LogoVPN from '../assets/Logo.svg';
 import ButtonPrimary from '../molecules/ButtonPrimary';
+import { useAuth } from '@/composables/useAuth.js';
+import EmailDisplay from '../molecules/EmailDisplay';
 
-export default {
-  components: {
-    ButtonPrimary
+const { token, user } = useAuth();
+const { user_name }  = JSON.parse(user.value);
 
-  },
-  setup() {
-    const activeLink = ref(null);
-    const scrollActive = ref(false);
-    const defaultBtnFont = 'font-bold';
+console.log(user_name, JSON.parse(user.value));
 
-    const handleScroll = () => {
-      scrollActive.value = window.scrollY > 20;
-    };
+const activeLink = ref(null);
+const scrollActive = ref(false);
+const defaultBtnFont = 'font-bold';
 
-    onMounted(() => {
-      window.addEventListener('scroll', handleScroll);
-    });
-
-    return {
-      activeLink,
-      scrollActive,
-      handleScroll,
-      defaultBtnFont
-    };
-  },
+const handleScroll = () => {
+  scrollActive.value = window.scrollY > 20;
 };
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
 </script>

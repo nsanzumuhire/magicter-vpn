@@ -1,5 +1,7 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuth } from '@/composables/useAuth';
+import { useToast } from '@/composables/useToast';
 
 // default layout and download page (landing)
 import AdminLayout from './layouts/AdminLayout.vue';
@@ -28,7 +30,6 @@ const routes = [
   {
     path: '/account',
     component: AdminLayout,
-    meta: { requiresAuth: true },
     children: [
       { path: '', name: 'Overview', component: () => import('./pages/dashboard/OverviewPage.vue') },
       {
@@ -53,12 +54,27 @@ const routes = [
       },
       { path: 'faq', name: 'FAQs', component: () => import('./pages/dashboard/FaqPage.vue') },
     ],
+    meta: { requiresAuth: true },
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+// Global navigation guard
+router.beforeEach((to, from, next) => {
+  const { token } = useAuth();
+  const { showErrorMsg } = useToast();
+
+  console.log(token.value, to);
+  if (to.meta.requiresAuth && !token.value) {
+    showErrorMsg('Something wrong, Your session expired kindly login again');
+    next('/auth/signin');
+  } else {
+    next();
+  }
 });
 
 router.afterEach(to => {

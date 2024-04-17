@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 export function useAuth() {
   const router = useRouter();
   const token = ref(localStorage.getItem('token'));
-  const user = ref(JSON.parse(localStorage.getItem('user')));
+  const user = ref(localStorage.getItem('user'));
   const deviceId = ref(12343444);
 
   const setToken = newToken => {

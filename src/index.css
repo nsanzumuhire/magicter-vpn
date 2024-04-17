@@ -81,3 +81,20 @@ html {
     -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .2);
     Box-shadow: 0 0 20px rgba(0, 0, 0, .2);
 }
+
+  /* Success theme */
+  .v-toast__item--.success {
+    background-color: #5cfbbe !important;
+    color: #fff;
+  }
+
+  /* Error theme */
+  .v-toast__item--error  {
+    background-color: #fb5c5c !important;
+    color: #fff !important;
+  }
+
+   /* Error theme */
+   .v-toast__item--error .v-toast__text {
+    color: #fff !important;
+  }
