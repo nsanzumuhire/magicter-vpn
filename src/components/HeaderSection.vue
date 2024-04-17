@@ -14,7 +14,7 @@
           <ButtonPrimary :link="'/auth/signup'" :classes="defaultBtnFont">Sign Up</ButtonPrimary>
         </template>
         <router-link v-else to="/account" class="cursor-pointer"> 
-          <EmailDisplay  :email="user_name"></EmailDisplay>
+          <EmailDisplay  :email="user_?.user_name"></EmailDisplay>
         </router-link>
  
 
@@ -52,9 +52,9 @@ import { useAuth } from '@/composables/useAuth.js';
 import EmailDisplay from '../molecules/EmailDisplay';
 
 const { token, user } = useAuth();
-const { user_name }  = JSON.parse(user.value);
+const user_  = JSON.parse(user.value);
 
-console.log(user_name, JSON.parse(user.value));
+console.log(JSON.parse(user.value));
 
 const activeLink = ref(null);
 const scrollActive = ref(false);

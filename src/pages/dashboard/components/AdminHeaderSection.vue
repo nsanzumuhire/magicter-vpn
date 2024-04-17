@@ -3,7 +3,7 @@
 <template>
     <div class="flex w-full items-center justify-between">
         <h3 class="text-gray-600 text-xl font-bold">{{ currentPageName }}</h3>
-        <EmailDisplay class="cursor-pointer" :email="user_name" :classes="'border-gray-500'"></EmailDisplay>
+        <EmailDisplay class="cursor-pointer" :email="user_?.user_name" :classes="'border-gray-500'"></EmailDisplay>
     </div>
 </template>
 
@@ -15,7 +15,7 @@ import { useAuth } from '@/composables/useAuth.js';
 
 const routerStore = useRouterStore();
 const { user } = useAuth();
-const { user_name }  = JSON.parse(user.value);
+const user_  = JSON.parse(user.value);
 
 
 const currentPageName = computed(() => {
