@@ -6,13 +6,19 @@ export const useRouterStore = defineStore({
 
   state: () => ({
     currentPageName: '',
+    isSidebarOpen: false,
   }),
   getters: {
     currentPage: state => state.currentPageName,
+    sidebarOpen: state => state.isSidebarOpen,
   },
   actions: {
     setCurrentPageName(name) {
       this.currentPageName = name;
+    },
+
+    handleSidebar() {
+      this.isSidebarOpen = !this.isSidebarOpen;
     },
   },
 });
