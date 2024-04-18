@@ -14,7 +14,7 @@
                                 </div>
                         </router-link>
                 </div></template>
-                <div class="flex items-center justify-between py-4 mr-2 text-gray-600">
+                <div class="flex items-center justify-between py-4 mr-4 text-gray-600">
                 <p class="text-xs px-6  opacity-75 font-light">SERVICES</p>
                 <XMarkIcon v-if="!props.showHeaderIcon" @click="handleSideBar" class="h-6 w-6 cursor-pointer"/>
                 </div>
