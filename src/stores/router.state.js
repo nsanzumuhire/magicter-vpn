@@ -7,10 +7,12 @@ export const useRouterStore = defineStore({
   state: () => ({
     currentPageName: '',
     isSidebarOpen: false,
+    codeInputFocus: -1,
   }),
   getters: {
     currentPage: state => state.currentPageName,
     sidebarOpen: state => state.isSidebarOpen,
+    shouldFocus: state => state.codeInputFocus,
   },
   actions: {
     setCurrentPageName(name) {
@@ -19,6 +21,9 @@ export const useRouterStore = defineStore({
 
     handleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen;
+    },
+    triggerFocusedInput(num) {
+      this.codeInputFocus = num;
     },
   },
 });

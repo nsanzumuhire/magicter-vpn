@@ -68,7 +68,6 @@ router.beforeEach((to, from, next) => {
   const { token } = useAuth();
   const { showErrorMsg } = useToast();
 
-  console.log(token.value, to);
   if (to.meta.requiresAuth && !token.value) {
     showErrorMsg('Something wrong, Your session expired kindly login again');
     next('/auth/signin');

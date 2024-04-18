@@ -7,7 +7,7 @@
                 <div
                   class="grid grid-cols-4 gap-6">
                 <template v-for="(c, index) in codes" :key="index">
-                    <InputDefault :ref="`inputField${index}`" :classes="'px-8'" v-model="codeArray[index]" :type="'text'" :min="1" :max="1" :placeholder="''"/>
+                    <InputDefault :should-focus="index" :classes="'px-8'" v-model="codeArray[index]" :type="'text'" :min="1" :max="1" :placeholder="''"/>
                 </template>
  
                 </div>
@@ -21,7 +21,7 @@
     <script setup>
     import ButtonPrimary from '@/molecules/ButtonPrimary.vue';
     import InputDefault from '@/molecules/InputDefault.vue';
-    import { ref } from 'vue'
+    import { ref, onMounted, watch, computed } from 'vue'
     import { useRouter } from 'vue-router';
     import EmailDisplay from '@/molecules/EmailDisplay.vue';
     import { useAuth } from '@/composables/useAuth'; 
@@ -29,6 +29,7 @@
     import { useConfig } from '@/composables/useConfig.js'
     import { useRoute } from 'vue-router';
     import { useToast } from '@/composables/useToast.js'
+    import { useRouterStore } from '../../stores/router.state'
 
     const { getStorage, setStorage,removeStorage, setToken } = useAuth();
     const { deviceId } = useConfig();
@@ -38,14 +39,14 @@
     const router = useRouter();
     const email = ref(getStorage('email'));
     const codes = ref([0, 1, 2, 3]);
-    const codeArray = ([]);
+    const codeArray = ref([]);
     const isLoading = ref(false);
     const route = useRoute();
-    const queryType = route.query.type
+    const queryType = route.query.type;
     
 
     async function verifyCodeFunc() {
-        const verificationCode = parseInt(codeArray.join(''));
+        const verificationCode = parseInt(codeArray.value.join(''));
 
         if (queryType === 'forgot-pwd') {
           router.push('/auth/reset-password?code=' + verificationCode);
@@ -68,5 +69,24 @@
             }
         }
     } 
+
+  const focusedInput = computed(() => {
+  const routeState = useRouterStore()
+  return routeState.codeInputFocus;
+  })
+
+    const triggerFocus = (num) => {
+      const state = useRouterStore();
+      state.triggerFocusedInput(num)
+    }
+
+    watch(codeArray.value, (newCodeArray, oldCodeArray) => {
+      console.log(newCodeArray, oldCodeArray)
+      triggerFocus(focusedInput.value + 1)
+    });
+
+    onMounted(() => {
+      triggerFocus(0)
+    });
 
     </script>

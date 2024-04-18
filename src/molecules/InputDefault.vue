@@ -20,7 +20,8 @@
   
 <script setup>
 import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline';
-import { defineProps,ref, onMounted } from 'vue';
+import { defineProps,ref, watch, computed, onMounted  } from 'vue';
+import { useRouterStore } from '@/stores/router.state'
 // Define props using defineProps
 const props = defineProps({
   modelValue: String,
@@ -37,9 +38,14 @@ const props = defineProps({
     type: String,
     required: false
   },
+  shouldFocus:{
+    type: Number,
+    default: 0
+  },
   classes: String,
 });
 
+const inputRef = ref(null);
 const seeText = ref(true);
 
 
@@ -47,8 +53,29 @@ const toggleSeePwd = () => {
   seeText.value = !seeText.value;
 };
 
-onMounted(() => {
+function focusInput() {
+  if (focusedInput.value === props.shouldFocus) {
+    inputRef.value.focus();
+  }
+}
 
+const focusedInput = computed(() => {
+  const routeState = useRouterStore()
+  return routeState.codeInputFocus;
+})
+
+
+watch(() => focusedInput.value, () => {
+  focusInput()
+     
 });
+
+
+onMounted(() => {
+  focusInput()
+})
+
+
+
 
 </script>

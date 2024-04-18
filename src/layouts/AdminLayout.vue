@@ -9,19 +9,11 @@
         </div>
         <!-- -->
     
-       
     </template>
     
-    <script>
+    <script setup>
     import AdminHeaderSection from '@/pages/dashboard/components/AdminHeaderSection.vue';
-   import FooterSmallSection from '@/components/FooterSmallSection.vue'
+    import FooterSmallSection from '@/components/FooterSmallSection.vue'
     import SidebarSection from '@/pages/dashboard/components/SidebarSection.vue'
-    export default {
-        components: {
-            FooterSmallSection,
-            SidebarSection,
-            AdminHeaderSection
-        }
-    }
-    
+
     </script>

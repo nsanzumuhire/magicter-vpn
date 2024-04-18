@@ -12,7 +12,7 @@
             <router-link to="/auth/signin" class="cursor-pointer text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-purple-500 font-bold transition-all">
             Sign In
           </router-link>
-          <ButtonPrimary :link="'/auth/signup'" :classes="defaultBtnFont">Sign Up</ButtonPrimary>
+          <ButtonPrimary :is-full="false" :link="'/auth/signup'" :classes="defaultBtnFont">Sign Up</ButtonPrimary>
         </template>
         <router-link v-else to="/account" class="cursor-pointer"> 
           <EmailDisplay  :email="user_?.user_name"></EmailDisplay>
