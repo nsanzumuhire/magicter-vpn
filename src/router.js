@@ -7,6 +7,7 @@ import { useToast } from '@/composables/useToast';
 import AdminLayout from './layouts/AdminLayout.vue';
 import AuthLayout from './layouts/AuthLayout.vue';
 import DownloadPage from './pages/DownloadPage.vue';
+import TopUpCenterPage from './pages/dashboard/TopUpCenterPage.vue';
 import { useRouterStore } from './stores/router.state';
 
 const routes = [
@@ -34,8 +35,19 @@ const routes = [
       { path: '', name: 'Overview', component: () => import('./pages/dashboard/OverviewPage.vue') },
       {
         path: 'top-up-center',
-        name: 'Top-up center',
-        component: () => import('./pages/dashboard/TopUpCenterPage.vue'),
+        component: TopUpCenterPage,
+        children: [
+          {
+            path: 'new',
+            name: 'Top-up center',
+            component: () => import('./pages/dashboard/topup/TopupSection.vue'),
+          },
+          {
+            path: 'history',
+            name: 'Order history',
+            component: () => import('./pages/dashboard/topup/OrderHistory.vue'),
+          },
+        ],
       },
       {
         path: 'planning-center',
