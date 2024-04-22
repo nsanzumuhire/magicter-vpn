@@ -16,11 +16,11 @@
           class="grid grid-flow-row sm:grid-flow-row grid-cols-1 sm:grid-cols-3 gap-8 z-10"
         >
           <template v-for="(platform, index) in platforms" :key="index">
-            <a class="quick-stats rounded-full cursor-pointer  flex items-center mx-auto sm:w-auto">
+            <a @click="onOpen(platform.name)" class="quick-stats rounded-full cursor-pointer  flex items-center mx-auto sm:w-auto">
                 <div class="flex items-center justify-center bg-purple-100 w-10 h-10 mr-6 rounded-full">
                   <img :src="require(`@/assets/Icon/${platform.icon}`)" class="h-6 w-6" />
                 </div>
-                <p class="text-base text-black-500 text-sm mr-4 -ml-2">{{ platform.name }}</p>
+                <p class="text-base text-black-500 text-sm mr-4 -ml-2 capitalize">{{ platform.name }}</p>
               </a>
           </template>
         </div>
@@ -38,42 +38,47 @@
             </div>
           </div>
         </div>
-    
+  
+  <PopupModal v-if="modalOpen" @close="onClose">
+    <DownloadSection :platform="selectedPlatform" :default-class="''"></DownloadSection>
+  </PopupModal>
     </div>
 </template>
   
-<script>
-
-// import ButtonPrimary from "../molecules/ButtonPrimary.vue";
+<script setup>
+import PopupModal from '@/components/PopupModal.vue'
+import DownloadSection from '@/components/DownloadSection.vue'
 import { ref } from 'vue';
 
-export default {
-  components: {
-    // ButtonPrimary
-  },
-  setup() {
-    // Array of platforms with name and icon
-    const platforms = ref([
+const platforms = ref([
       {
-        name: "Windows",
+        name: "windows",
         icon: "windows.svg",
         link: ""
       },
       {
-        name: "Mac OS",
+        name: "mac",
         icon: "mac-os.svg",
         link: ""
       },
       {
-        name: "Android",
+        name: "android",
         icon: "android.svg",
         link: ""
       },
-    ]);
+]);
 
-    return {
-      platforms
-    };
-  }
+const modalOpen = ref(false);
+const selectedPlatform = ref('')
+
+const onOpen = (name) => {
+  selectedPlatform.value = name;
+  modalOpen.value = !modalOpen.value
+}
+
+const onClose = () => {
+  selectedPlatform.value = '';
+  modalOpen.value = false;
 };
-  </script>
+
+</script>

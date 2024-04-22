@@ -20,7 +20,7 @@
     isLoading: {type: Boolean, default: false},
     isFull: {type: Boolean, default: true}
   });
- console.log(props.isFull)
+
   const isFullClass = computed(() => {
     return props.isFull ? ' w-full': ''
   })
