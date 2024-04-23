@@ -64,6 +64,11 @@ const routes = [
         name: 'Marketing center',
         component: () => import('./pages/dashboard/MarketingCenter.vue'),
       },
+      {
+        path: 'checkout',
+        name: 'Checkout',
+        component: () => import('./pages/dashboard/CheckoutPage.vue'),
+      },
       { path: 'faq', name: 'FAQs', component: () => import('./pages/dashboard/FaqPage.vue') },
     ],
     meta: { requiresAuth: true },

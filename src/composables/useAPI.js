@@ -29,9 +29,11 @@ export const useAPI = () => {
     // end of authentication
 
     // top-up order history
-    userPackages: query => callAPI('GET', '/user-type-packages' + query),
+    userPackages: query => callAPI('GET', '/user-type-packages?user_type=' + query),
+    orderHistory: data => callAPI('GET', '/order-history', data),
 
     // faqs
     getFaqs: () => callAPI('GET', '/faqs'),
+    getdefaultData: query => callAPI('GET', '/defaultData?type=' + query),
   };
 };

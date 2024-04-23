@@ -19,7 +19,7 @@
                 <XMarkIcon v-if="!props.showHeaderIcon" @click="handleSideBar" class="h-6 w-6 cursor-pointer"/>
                 </div>
                 <div class="flex flex-col text-gray-600">
-                        <router-link class="text-sm w-full hover:bg-purple-100" to="/account/top-up-center">
+                        <router-link class="text-sm w-full hover:bg-purple-100" to="/account/top-up-center/new">
                                 <div class="flex items-center gap-2 px-6 py-4">
                                         <CreditCardIcon class="h-5 w-5"/>
                                         <span>Top-up center</span>
