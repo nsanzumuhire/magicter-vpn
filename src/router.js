@@ -9,6 +9,7 @@ import AuthLayout from './layouts/AuthLayout.vue';
 import DownloadPage from './pages/DownloadPage.vue';
 import TopUpCenterPage from './pages/dashboard/TopUpCenterPage.vue';
 import { useRouterStore } from './stores/router.state';
+import SimpleLayout from './layouts/SimpleLayout.vue';
 
 const routes = [
   {
@@ -31,6 +32,7 @@ const routes = [
   {
     path: '/account',
     component: AdminLayout,
+    meta: { requiresAuth: true },
     children: [
       { path: '', name: 'Overview', component: () => import('./pages/dashboard/OverviewPage.vue') },
       {
@@ -64,14 +66,26 @@ const routes = [
         name: 'Marketing center',
         component: () => import('./pages/dashboard/MarketingCenter.vue'),
       },
-      {
-        path: 'checkout',
-        name: 'Checkout',
-        component: () => import('./pages/dashboard/CheckoutPage.vue'),
-      },
       { path: 'faq', name: 'FAQs', component: () => import('./pages/dashboard/FaqPage.vue') },
     ],
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: SimpleLayout,
     meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'Checkout',
+        component: () => import('./pages/checkout/CheckoutPage.vue'),
+      },
+      {
+        path: 'success',
+        name: 'Payment successfull',
+        component: () => import('./pages/checkout/PaymentSuccess.vue'),
+      },
+    ],
   },
 ];
 

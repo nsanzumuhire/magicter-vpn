@@ -1,4 +1,4 @@
 <template>
-    Checkout page
+    Payment successfull page
 </template>
 <script setup></script>

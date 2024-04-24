@@ -18,8 +18,8 @@
                   <p class="text-4xl font-bold text-black-500 text-center mb-4">${{product.price}}<span class="text-xs font-light opacity-75">/{{ product.months > 1 ? product.months + 'months': 'month'}} </span></p>
 
                     <div class="flex w-full">
-                        <ButtonPrimary v-if="isRecommended" :classes="' w-full'">Purchase</ButtonPrimary>
-                        <ButtonOutline v-else>Purchase</ButtonOutline>
+                        <ButtonPrimary @click="goToCheckout" v-if="isRecommended" :classes="' w-full'">Purchase</ButtonPrimary>
+                        <ButtonOutline @click="goToCheckout" v-else>Purchase</ButtonOutline>
                     </div>
 
                   <p class="text-sm text-black-500  font-light">30-day money-back guarantee</p>
@@ -34,17 +34,16 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from 'vue';
+import { defineProps, defineEmits, computed } from 'vue';
 import ButtonPrimary from '@/molecules/ButtonPrimary';
 import ButtonOutline from '@/molecules/ButtonOutline';
 
+const emits = defineEmits(["checkout"]);
 const props = defineProps({
     isRecommended: {type: Boolean, default: false },
     name: {Type: String, default: ''},
     product: Object
 })
-
-console.log(props.product);
 
 const savedPercentage = computed(() => {
     const { price, months } = props.product;
@@ -54,6 +53,10 @@ const savedPercentage = computed(() => {
 
     return months === 1 ? 0 : (savedAmount / regularPrice) * 100
 })
+
+function goToCheckout() {
+  emits('checkout');
+}
 
 console.log('----savedPercentage----', savedPercentage.value.toFixed(0));
 

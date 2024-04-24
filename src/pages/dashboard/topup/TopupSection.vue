@@ -37,9 +37,9 @@
                 </div>
 
                 <div class="grid w-full grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-12 py-8 lg:py-12">
-                  <PackageCard name="Individual" :product="individual"></PackageCard>
-                  <PackageCard name="Enterprise" :is-recommended="true" :product="enterprise"></PackageCard>
-                  <PackageCard name="Partner" :product="partner"></PackageCard>
+                  <PackageCard name="Individual" @checkout="saveCart(individual)" :product="individual"></PackageCard>
+                  <PackageCard name="Enterprise" @checkout="saveCart(enterprise)" :is-recommended="true" :product="enterprise"></PackageCard>
+                  <PackageCard name="Partner" @checkout="saveCart(enterprise)" :product="partner"></PackageCard>
                 </div>
 
             </div>
@@ -134,8 +134,13 @@ import { useRouterStore } from '@/stores/router.state'
 import { onMounted, computed, ref } from 'vue';
 import PackageCard from '../components/PackageCard';
 import SpinnerLoader from '@/molecules/SpinnerLoader.vue'
+import { useRouter } from 'vue-router';
+import { useAuth } from '../../../composables/useAuth.js'
 
+
+const { setStorage } = useAuth();
 const { userPackages } = useAPI();
+const router = useRouter();
 const state = useRouterStore();
 const selectedMonths = ref(1);
 
@@ -178,6 +183,16 @@ async function getUserPackages() {
             partner: { isLoading: false },
         });
   }
+}
+
+function saveCart(cart) {
+  setStorage('cart', JSON.stringify(cart))
+  state.setState({ 
+    cart
+  });
+  setTimeout(() => {
+    router.push('/checkout')
+  }, 100);
 }
 
 

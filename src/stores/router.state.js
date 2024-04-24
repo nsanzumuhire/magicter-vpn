@@ -1,5 +1,6 @@
 // store/index.js
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
 export const useRouterStore = defineStore({
   id: 'router',
@@ -54,6 +55,7 @@ export const useRouterStore = defineStore({
       isLoading: false,
       data: null,
     },
+    cart: ref(JSON.parse(localStorage.getItem('cart'))) || null,
     currentPageName: '',
     isSidebarOpen: false,
     codeInputFocus: -1,
@@ -66,6 +68,7 @@ export const useRouterStore = defineStore({
       return (partialName, months) => state[partialName]?.data?.find(el => el.months === months);
     },
     orderHistoryData: state => state.orderHistory.data,
+    getCart: state => state.cart,
   },
   actions: {
     setState(partialState) {
@@ -86,7 +89,6 @@ export const useRouterStore = defineStore({
     setCurrentPageName(name) {
       this.currentPageName = name;
     },
-
     handleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen;
     },

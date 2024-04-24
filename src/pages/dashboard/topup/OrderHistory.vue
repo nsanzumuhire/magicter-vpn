@@ -1,6 +1,7 @@
 <template>
 <template v-if="!isLoading">
   <div class="container max-w-screen-xl mx-auto mt-8">
+                
   <div class="overflow-x-auto">
     <table class="table-auto min-w-full bg-white-500 shadow-md rounded-lg overflow-hidden">
       <thead class="bg-gray-100">
@@ -68,8 +69,6 @@ async function getUserOrderHistory() {
         });
   }
 
-console.log('isLoading', isLoading)
-console.log('his--', history)
 }
 
 const history = computed(() => {
