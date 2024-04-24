@@ -5,6 +5,55 @@ export const useRouterStore = defineStore({
   id: 'router',
 
   state: () => ({
+    individual: {
+      isLoading: false,
+      data: [
+        {
+          id: 1,
+          months: 1,
+          member: null,
+          devices: null,
+          price: 10,
+          route: null,
+        },
+        {
+          id: 2,
+          months: 3,
+          member: null,
+          devices: null,
+          price: 20,
+          route: null,
+        },
+        {
+          id: 3,
+          months: 6,
+          member: null,
+          devices: null,
+          price: 50,
+          route: null,
+        },
+        {
+          id: 4,
+          months: 12,
+          member: null,
+          devices: null,
+          price: 100,
+          route: null,
+        },
+      ],
+    },
+    enterprise: {
+      isLoading: false,
+      data: [],
+    },
+    partner: {
+      isLoading: false,
+      data: [],
+    },
+    orderHistory: {
+      isLoading: false,
+      data: null,
+    },
     currentPageName: '',
     isSidebarOpen: false,
     codeInputFocus: -1,
@@ -13,8 +62,27 @@ export const useRouterStore = defineStore({
     currentPage: state => state.currentPageName,
     sidebarOpen: state => state.isSidebarOpen,
     shouldFocus: state => state.codeInputFocus,
+    getPackage: state => {
+      return (partialName, months) => state[partialName]?.data?.find(el => el.months === months);
+    },
+    orderHistoryData: state => state.orderHistory.data,
   },
   actions: {
+    setState(partialState) {
+      // Loop through each key in the partialState object
+      for (const key in partialState) {
+        // Check if the key exists in the store state
+        if (key in this.$state) {
+          // If the value is an object, merge the properties
+          if (typeof partialState[key] === 'object' && !Array.isArray(partialState[key])) {
+            this.$state[key] = { ...this.$state[key], ...partialState[key] };
+          } else {
+            // Otherwise, assign the value directly
+            this.$state[key] = partialState[key];
+          }
+        }
+      }
+    },
     setCurrentPageName(name) {
       this.currentPageName = name;
     },

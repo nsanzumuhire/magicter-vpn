@@ -8,7 +8,7 @@ export const useConfig = () => {
   const headers = {
     'Content-Type': 'application/json; charset=utf-8',
     Accept: 'application/json',
-    authentication: token,
+    authentication: token?.value || null,
   };
 
   // Generate a UUID (Universally Unique Identifier)

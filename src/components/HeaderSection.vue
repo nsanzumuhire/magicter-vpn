@@ -3,7 +3,7 @@
         <header>
     <nav class="max-w-screen-xl px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4">
       <div class="col-start-1 col-end-2 flex gap-2 items-center text-black-500">
-        <Bars3Icon v-if="!isSidebarOpen" @click="handleSideBar" class="h-8 w-8 cursor-pointer"/>
+        <Bars3Icon v-if="!isSidebarOpen && token" @click="handleSideBar" class="h-8 w-8 cursor-pointer"/>
         <img src="../assets/Logo.png" class="h-6 w-auto"  alt="Logo">
         <h2 class="text-black-500 text-base font-extrabold">Magicter <span class="text-purple-500">VPN</span></h2>
       </div>

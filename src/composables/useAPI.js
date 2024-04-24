@@ -30,7 +30,7 @@ export const useAPI = () => {
 
     // top-up order history
     userPackages: query => callAPI('GET', '/user-type-packages?user_type=' + query),
-    orderHistory: data => callAPI('GET', '/order-history', data),
+    orderHistory: () => callAPI('GET', '/order-history'),
 
     // faqs
     getFaqs: () => callAPI('GET', '/faqs'),

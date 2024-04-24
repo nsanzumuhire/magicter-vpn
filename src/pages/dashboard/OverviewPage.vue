@@ -229,5 +229,4 @@
 </template>
 <script setup>
 import ButtonPrimary from '@/molecules/ButtonPrimary';
-
 </script>
