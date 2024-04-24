@@ -59,6 +59,7 @@ export const useRouterStore = defineStore({
     currentPageName: '',
     isSidebarOpen: false,
     codeInputFocus: -1,
+    selectedMonths: 1,
   }),
   getters: {
     currentPage: state => state.currentPageName,
@@ -69,6 +70,7 @@ export const useRouterStore = defineStore({
     },
     orderHistoryData: state => state.orderHistory.data,
     getCart: state => state.cart,
+    getSelectedMonths: state => state.selectedMonths,
   },
   actions: {
     setState(partialState) {

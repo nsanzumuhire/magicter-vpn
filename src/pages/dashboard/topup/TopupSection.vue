@@ -16,34 +16,16 @@
                 >
                   Let's choose the package that is best for you and explore it happily and cheerfully.
                 </p>
-                
-                <div class="flex w-full space-x-4 text-center justify-center">
-                  <label class="flex items-center gap-2">
-                    <input @click="setMonths(1)" type="radio" :checked="selectedMonths === 1" class="form-radio cursor-pointer h-5 w-5 rounded-full bg-gray-500 border-transparent focus:border-transparent focus:bg-gray-100 text-gray-700 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500 text-purple-500" name="radio" value="option1">
-                    <span class="ml-2">1 month</span>
-                  </label>
-                  <label class="inline-flex items-center">
-                    <input @click="setMonths(3)" type="radio" :checked="selectedMonths === 3" class="form-radio h-5 w-5 cursor-pointer rounded-full bg-gray-500 border-transparent focus:border-transparent focus:bg-gray-100 text-gray-700 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500 text-purple-500" name="radio" value="option1">
-                    <span class="ml-2">3 months</span>
-                  </label>
-                  <label class="inline-flex items-center">
-                    <input @click="setMonths(6)" type="radio" :checked="selectedMonths === 6" class="form-radio h-5 w-5 cursor-pointer rounded-full bg-gray-500 border-transparent focus:border-transparent focus:bg-gray-100 text-gray-700 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500 text-purple-500" name="radio" value="option1">
-                    <span class="ml-2">6 months</span>
-                  </label>
-                  <label class="inline-flex items-center">
-                    <input @click="setMonths(12)" type="radio" :checked="selectedMonths === 12" class="form-radio h-5 w-5 cursor-pointer rounded-full bg-gray-500 border-transparent focus:border-transparent focus:bg-gray-100 text-gray-700 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500 text-purple-500" name="radio" value="option1">
-                    <span class="ml-2">1 year</span>
-                  </label>
-                </div>
+
+                <SelectMonths/>
 
                 <div class="grid w-full grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-12 py-8 lg:py-12">
-                  <PackageCard name="Individual" @checkout="saveCart(individual)" :product="individual"></PackageCard>
-                  <PackageCard name="Enterprise" @checkout="saveCart(enterprise)" :is-recommended="true" :product="enterprise"></PackageCard>
-                  <PackageCard name="Partner" @checkout="saveCart(enterprise)" :product="partner"></PackageCard>
+                  <PackageCard name="Individual" @checkout="saveCartData(individual)" :product="individual"></PackageCard>
+                  <PackageCard name="Enterprise" @checkout="saveCartData(enterprise)" :is-recommended="true" :product="enterprise"></PackageCard>
+                  <PackageCard name="Partner" @checkout="saveCartData(partner)" :product="partner"></PackageCard>
                 </div>
 
             </div>
-            <!-- Rest of the content -->
           </div>
         </div>
 
@@ -129,95 +111,33 @@
 
 <script setup>
 
-import { useAPI } from '@/composables/useAPI';
-import { useRouterStore } from '@/stores/router.state'
-import { onMounted, computed, ref } from 'vue';
+
 import PackageCard from '../components/PackageCard';
 import SpinnerLoader from '@/molecules/SpinnerLoader.vue'
+import SelectMonths from '../components/SelectMonths'
 import { useRouter } from 'vue-router';
-import { useAuth } from '../../../composables/useAuth.js'
+import { usePackages } from '@/composables/usePackages.js'
 
-
-const { setStorage } = useAuth();
-const { userPackages } = useAPI();
 const router = useRouter();
-const state = useRouterStore();
-const selectedMonths = ref(1);
+
+const {
+    isLoading,
+    partner,
+    individual,
+    enterprise,
+    saveCart
+  } = usePackages()
 
 
-function setMonths(months) {
-  selectedMonths.value = months
+function saveCartData(cart) {
+  saveCart(cart)
+  router.push('/checkout')
 }
 
-function getVal(name) {
-  return state.getPackage(name, selectedMonths.value)
-}
-
-async function getUserPackages() {
-
-  state.setState({ 
-    enterprise: { isLoading: true },
-    partner: { isLoading: true }
-  });
-
-  const enterpriseData = await userPackages('Enterprise');
-  const partnerData = await userPackages('Partner');
-
-
-  if (enterpriseData.statusCode === 200) {
-        state.setState({ 
-            enterprise: { isLoading: false, data: enterpriseData.data },
-        });
-  } else {
-        state.setState({ 
-            enterprise: { isLoading: false },
-        });
-  }
-
-  if (partnerData.statusCode === 200) {
-        state.setState({ 
-            partner: { isLoading: false, data: partnerData.data },
-        });
-  }  else {
-        state.setState({ 
-            partner: { isLoading: false },
-        });
-  }
-}
-
-function saveCart(cart) {
-  setStorage('cart', JSON.stringify(cart))
-  state.setState({ 
-    cart
-  });
-  setTimeout(() => {
-    router.push('/checkout')
-  }, 100);
-}
-
-
-const individual = computed(() => {
-    return getVal('individual');
-});
-
-const enterprise = computed(() => {
-    return getVal('enterprise');
-});
-
-const partner = computed(() => {
-    return getVal('partner');
-});
-
-const isLoading = computed(() => {
-    return state.enterprise.isLoading || state.partner.isLoading;
-});
-
-
-
-onMounted(() => {
-    if (!enterprise.value || !partner.value || !individual.value) {
-      getUserPackages();
-    }
-})
+// onMounted(() => {
+//     if (!enterprise.value || !partner.value || !individual.value) {
+//       getUserPackages();
+//     }
+// })
 
 </script>

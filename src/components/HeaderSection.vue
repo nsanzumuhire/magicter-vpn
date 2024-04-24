@@ -20,8 +20,6 @@
               <router-link v-else to="/account" class="cursor-pointer"> 
                 <EmailDisplay  :email="user_?.user_name"></EmailDisplay>
               </router-link>
-      
-
             </div>
           </nav>
   </header>

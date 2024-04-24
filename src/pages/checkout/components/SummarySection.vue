@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col gap-4 w-full bg-white-500 rounded-xl border border-gray-500 px-6 py-6">
       <div class="flex flex-col gap-2 border-b border-b-gray-500 pb-4">
-        <h3 class="text-base font-bold">{{cart.user_type || 'Individual'}}</h3>
+        <h3 class="text-base font-bold">{{!!cart.user_type ? cart.user_type : 'Individual'}}</h3>
         <div class="flex items-center justify-between font-light">
             <p class="text-sm">{{ cart.months > 1 ? cart.months + ' months': '1 month'}}</p>
             <p class="text-sm">${{cart.price}}</p>
