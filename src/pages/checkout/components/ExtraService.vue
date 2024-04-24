@@ -27,9 +27,9 @@
                             <SelectMonths/>
 
                             <div class="grid w-full grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-12 py-8 lg:py-12">
-                            <PackageCard name="Individual" @checkout="saveCartData(individual)" :product="individual"></PackageCard>
-                            <PackageCard name="Enterprise" @checkout="saveCartData(enterprise)" :is-recommended="true" :product="enterprise"></PackageCard>
-                            <PackageCard name="Partner" @checkout="saveCartData(partner)" :product="partner"></PackageCard>
+                                <PackageCard name="Individual" @checkout="saveCartData(individual)" :product="individual"></PackageCard>
+                                <PackageCard name="Enterprise" @checkout="saveCartData(enterprise)" :is-recommended="true" :product="enterprise"></PackageCard>
+                                <PackageCard name="Partner" @checkout="saveCartData(partner)" :product="partner"></PackageCard>
                             </div>
 
                         </div>

@@ -1,6 +1,6 @@
 <template>
 
-    <div class="max-w-screen-xl  px-8 xl:px-16 mx-auto" id="about">
+    <div class="max-w-screen-xl  px-8 xl:px-16 mx-auto">
         <div
           class="grid grid-flow-row sm:grid-flow-col grid-rows-2 md:grid-rows-1 sm:grid-cols-2 gap-8 pb-24"
         >
@@ -16,7 +16,7 @@
           class="grid grid-flow-row sm:grid-flow-row grid-cols-1 sm:grid-cols-3 gap-8 z-10"
         >
           <template v-for="(platform, index) in platforms" :key="index">
-            <a @click="onOpen(platform.name)" class="quick-stats rounded-full cursor-pointer  flex items-center mx-auto sm:w-auto">
+            <a @click="onOpen(platform)" class="quick-stats rounded-full cursor-pointer  flex items-center mx-auto sm:w-auto">
                 <div class="flex items-center justify-center bg-purple-100 w-10 h-10 mr-6 rounded-full">
                   <img :src="require(`@/assets/Icon/${platform.icon}`)" class="h-6 w-6" />
                 </div>
@@ -54,30 +54,30 @@ const platforms = ref([
       {
         name: "windows",
         icon: "windows.svg",
-        link: ""
+        description: "only support windows 10 and 11"
       },
       {
         name: "mac",
         icon: "mac-os.svg",
-        link: ""
+        description: "only Support for macOS 11 Big sur - 14 Sonoma"
       },
       {
         name: "android",
         icon: "android.svg",
-        link: ""
+        description: "only Support for android 12 - 14 "
       },
 ]);
 
 const modalOpen = ref(false);
-const selectedPlatform = ref('')
+const selectedPlatform = ref(null)
 
-const onOpen = (name) => {
-  selectedPlatform.value = name;
+const onOpen = (val) => {
+  selectedPlatform.value = val;
   modalOpen.value = !modalOpen.value
 }
 
 const onClose = () => {
-  selectedPlatform.value = '';
+  selectedPlatform.value = null;
   modalOpen.value = false;
 };
 
