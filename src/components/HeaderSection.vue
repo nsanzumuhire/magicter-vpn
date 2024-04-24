@@ -5,7 +5,10 @@
             <div class="col-start-1 col-end-2 flex gap-2 items-center text-black-500">
               <Bars3Icon v-if="!isSidebarOpen && token" @click="handleSideBar" class="h-8 w-8 cursor-pointer"/>
               <img src="../assets/Logo.png" class="h-6 w-auto"  alt="Logo">
-              <h2 class="text-black-500 text-base font-extrabold">Magicter <span class="text-purple-500">VPN</span></h2>
+              <h2 class="text-black-500 text-base font-extrabold">Magicter 
+                <span class="text-purple-500">VPN</span>
+                <span class="font-light px-2 opacity-75" v-if="$route.path === '/checkout'">CHECKOUT</span>
+              </h2>
             </div>
             <div class="col-start-10 col-end-12 font-medium flex justify-end items-center text-sm">
                 <template v-if="!token">
