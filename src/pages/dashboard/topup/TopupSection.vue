@@ -134,10 +134,4 @@ function saveCartData(cart) {
   router.push('/checkout')
 }
 
-// onMounted(() => {
-//     if (!enterprise.value || !partner.value || !individual.value) {
-//       getUserPackages();
-//     }
-// })
-
 </script>

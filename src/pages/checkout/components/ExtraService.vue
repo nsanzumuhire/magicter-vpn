@@ -35,6 +35,11 @@
                         </div>
                     </div>
                     </div>
+                    <template v-else>
+                        <div class="flex min-h-[100px] w-full justify-center items-center">
+                            <SpinnerLoader :full-loadder="true" />
+                        </div>
+                </template>
             </PopupModal>
         </div>
 </template>
@@ -42,7 +47,8 @@
 import ButtonOutline from '@/molecules/ButtonOutline';
 import PopupModal from '@/components/PopupModal';
 import PackageCard from '../../dashboard/components/PackageCard';
-import SelectMonths from '../../dashboard/components/SelectMonths'
+import SelectMonths from '../../dashboard/components/SelectMonths';
+import SpinnerLoader from '@/molecules/SpinnerLoader'
 import {  ArrowsRightLeftIcon } from '@heroicons/vue/24/outline';
 import { ref } from 'vue';
 
