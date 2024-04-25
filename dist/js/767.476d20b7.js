@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkmagicter_vpn"]=self["webpackChunkmagicter_vpn"]||[]).push([[767],{2767:function(e,n,r){function t(e,n){return" Checkout page "}r.r(n),r.d(n,{default:function(){return f}});var u=r(1241);const c={},a=(0,u.A)(c,[["render",t]]);var f=a}}]);
-//# sourceMappingURL=767.476d20b7.js.map
