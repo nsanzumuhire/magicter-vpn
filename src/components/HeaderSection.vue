@@ -18,11 +18,11 @@
                 <ButtonPrimary :is-full="false" :link="'/auth/signup'" :classes="defaultBtnFont">Sign Up</ButtonPrimary>
               </template>
               <div v-else class="cursor-pointer rounded-full items-center flex gap-1"> 
-                <dropdownMenu>
+                  <dropdownMenu>
                     <template #trigger>
                       <EmailDisplay :is-dropdown="true"  :email="user_?.user_name"></EmailDisplay>
                     </template>
-                    <div class="absolute z-20 top-[6%] right-[7.2%] w-[178px] flex flex-col gap-2 text-sm bg-white-500 shadow-md rounded-xl">
+                    <div class="flex flex-col gap-2 text-sm bg-white-500 shadow-md rounded-xl">
                         <p @click="logout()" class="hover:bg-purple-100 px-6 py-4">Logout</p>
                         <router-link class="hover:bg-purple-100 px-6 py-4" to="/account">Go to your account</router-link>
                     </div>

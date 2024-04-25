@@ -8,7 +8,7 @@
                 <template #trigger>
                     <EmailDisplay :classes="'border-gray-500'" :is-dropdown="true"  :email="user_?.user_name"></EmailDisplay>
                 </template>
-                <div class="flex absolute z-20 top-[4%] right-[2%] w-[178px] flex-col gap-2 text-sm bg-white-500 shadow-md rounded-xl">
+                <div class="flex absolute z-20 top-[4%] right-0 w-[178px] flex-col gap-2 text-sm bg-white-500 shadow-md rounded-xl">
                     <p @click="logout()" class="hover:bg-purple-100 px-6 py-4">Logout</p>
                 </div>
             </dropdownMenu>
