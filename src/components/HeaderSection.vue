@@ -17,9 +17,17 @@
                 </router-link>
                 <ButtonPrimary :is-full="false" :link="'/auth/signup'" :classes="defaultBtnFont">Sign Up</ButtonPrimary>
               </template>
-              <router-link v-else to="/account" class="cursor-pointer"> 
-                <EmailDisplay  :email="user_?.user_name"></EmailDisplay>
-              </router-link>
+              <div v-else class="cursor-pointer rounded-full items-center flex gap-1"> 
+                <dropdownMenu>
+                    <template #trigger>
+                      <EmailDisplay :is-dropdown="true"  :email="user_?.user_name"></EmailDisplay>
+                    </template>
+                    <div class="absolute z-20 top-[6%] right-[7.2%] w-[178px] flex flex-col gap-2 text-sm bg-white-500 shadow-md rounded-xl">
+                        <p @click="logout()" class="hover:bg-purple-100 px-6 py-4">Logout</p>
+                        <router-link class="hover:bg-purple-100 px-6 py-4" to="/account">Go to your account</router-link>
+                    </div>
+                </dropdownMenu>
+              </div>
             </div>
           </nav>
   </header>
@@ -40,9 +48,10 @@ import ButtonPrimary from '../molecules/ButtonPrimary';
 import { useAuth } from '@/composables/useAuth.js';
 import EmailDisplay from '../molecules/EmailDisplay';
 import { Bars3Icon } from '@heroicons/vue/24/outline';
-import { useRouterStore } from '@/stores/router.state'
+import { useRouterStore } from '@/stores/router.state';
+import dropdownMenu from '../molecules/DropdownMenu';
 
-const { token, user } = useAuth();
+const { token, user, logout } = useAuth();
 const user_  = JSON.parse(user.value);
 const scrollActive = ref(false);
 const defaultBtnFont = 'font-bold';

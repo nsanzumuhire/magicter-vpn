@@ -1,5 +1,6 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAPI } from './useAPI';
 
 export function useAuth() {
   const router = useRouter();
@@ -30,10 +31,12 @@ export function useAuth() {
   };
 
   const logout = () => {
+    const { logout } = useAPI();
+    logout();
     removeToken();
     removeStorage('user');
     removeStorage('email');
-    router.push('/auth/signin');
+    router.push('/');
   };
 
   return {
