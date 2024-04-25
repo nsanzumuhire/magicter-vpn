@@ -110,6 +110,7 @@ router.beforeEach((to, from, next) => {
 router.afterEach(to => {
   const routerStore = useRouterStore();
   routerStore.setCurrentPageName(to.name);
+  routerStore.handleCloseSidebar();
 });
 
 export default router;

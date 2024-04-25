@@ -113,7 +113,7 @@
 
 
 import PackageCard from '../components/PackageCard';
-import SpinnerLoader from '@/molecules/SpinnerLoader.vue'
+import SpinnerLoader from '@/molecules/SpinnerLoader.vue';
 import SelectMonths from '../components/SelectMonths'
 import { useRouter } from 'vue-router';
 import { usePackages } from '@/composables/usePackages.js'

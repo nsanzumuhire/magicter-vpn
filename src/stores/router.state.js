@@ -60,6 +60,10 @@ export const useRouterStore = defineStore({
     isSidebarOpen: false,
     codeInputFocus: -1,
     selectedMonths: 1,
+    faqs: {
+      isLoading: false,
+      data: [],
+    },
   }),
   getters: {
     currentPage: state => state.currentPageName,
@@ -71,6 +75,10 @@ export const useRouterStore = defineStore({
     orderHistoryData: state => state.orderHistory.data,
     getCart: state => state.cart,
     getSelectedMonths: state => state.selectedMonths,
+    getFaqs: state => {
+      return input =>
+        state.faqs.data.filter(el => el.question.includes(input) || el.answer.includes(input));
+    },
   },
   actions: {
     setState(partialState) {
@@ -93,6 +101,9 @@ export const useRouterStore = defineStore({
     },
     handleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen;
+    },
+    handleCloseSidebar() {
+      this.isSidebarOpen = false;
     },
     triggerFocusedInput(num) {
       this.codeInputFocus = num;
