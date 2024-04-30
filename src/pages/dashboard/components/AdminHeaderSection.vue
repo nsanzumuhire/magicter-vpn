@@ -1,7 +1,7 @@
 
 
 <template>
-    <div class="flex w-full items-center justify-between">
+    <div class="flex w-full items-center justify-between px-6">
         <h3 class="text-gray-600 text-xl font-bold">{{ currentPageName }}</h3>
         <div class="cursor-pointer">
             <dropdownMenu>
@@ -13,8 +13,6 @@
                 </div>
             </dropdownMenu>
         </div>
-
-
     </div>
 </template>
 

@@ -11,11 +11,11 @@
             <p class="text-sm">VAT {{tax}}%</p>
             <p class="text-sm">${{tax.toFixed(2)}}</p>
       </div>
-      <div class="flex items-center justify-between border-b border-b-gray-500 pb-4">
+      <div class="flex items-center justify-between pb-4" :class="{'border-b border-b-gray-500 ': showCouponCode}">
             <p class="text-sm font-bold">Total</p>
             <p class="text-xl font-bold">${{cart.price + tax}}</p>
       </div>
-      <div class="flex w-full items-center gap-4">
+      <div class="flex w-full items-center gap-4" v-if="showCouponCode">
             <p v-if="!showCodeForm" @click="toggleCodeForm" class="cursor-pointer text-xs underline opacity-75">Got a coupon code? </p>
 
             <div  v-else class="flex w-full justify-between">
@@ -26,7 +26,7 @@
     </div>
  </template>
 
- <script setup>
+<script setup>
     import {defineProps, ref} from 'vue';
     import ButtonPrimary from '../../../molecules/ButtonPrimary.vue';
     import InputDefault from '../../../molecules/InputDefault.vue';

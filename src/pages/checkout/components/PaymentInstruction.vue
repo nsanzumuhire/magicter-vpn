@@ -5,10 +5,10 @@
             <a class="cursor-pointer underline" target="_blank" rel="noopener noreferrer" href="">Privacy policy</a>
         </p>
         <div class="flex flex-col gap-2 xl:flex-row items-center justify-between w-full border-b border-gray-500">
-            <div class="w-full xl:w-2/5">
+            <div v-if="!isFull" class="w-full xl:w-2/5">
                 <slot></slot>
             </div>
-            <div class="w-full xl:w-3/5 mb-4">
+            <div class="w-full mb-4" :class="{'xl:w-3/5': !isFull}">
                 <MoneyGuaranty/>
             </div>
         </div>
@@ -18,5 +18,10 @@
     </div>
 </template>
 <script setup>
-import MoneyGuaranty from './MoneyGuaranty'
+import { defineProps } from 'vue'
+import MoneyGuaranty from './MoneyGuaranty';
+
+defineProps({
+    isFull: { type: Boolean, default: false }
+})
 </script>

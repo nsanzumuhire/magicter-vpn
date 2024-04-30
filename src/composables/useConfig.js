@@ -4,7 +4,11 @@ import { v4 as UUID } from 'uuid';
 
 export const useConfig = () => {
   const { token } = useAuth();
-  const API_URL = 'https://nc.mgcores.com/apiv2/api/enrollment';
+  const API_URL = process.env.VUE_APP_API_URL;
+  const paymentRedirectUrl = process.env.VUE_APP_PAYMENT_SUCCESS_URL;
+  const paymentEnvornment = process.env.VUE_APP_PAYMENT_ENVIRONMENT;
+  const stripePK = process.env.VUE_APP_STRIPE_CLIENT_ID;
+  const paypalPK = process.env.VUE_APP_PAYPAL_CLIENT_ID;
   const headers = {
     'Content-Type': 'application/json; charset=utf-8',
     Accept: 'application/json',
@@ -25,5 +29,10 @@ export const useConfig = () => {
     deviceId,
     API_URL,
     headers,
+    paymentRedirectUrl,
+    paymentEnvornment,
+    generateUUID,
+    stripePK,
+    paypalPK,
   };
 };

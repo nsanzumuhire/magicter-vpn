@@ -35,5 +35,17 @@ export const useAPI = () => {
     // faqs
     getFaqs: () => callAPI('GET', '/faqs'),
     getdefaultData: query => callAPI('GET', '/defaultData?type=' + query),
+
+    //! Global Ali pay APIs
+    // request the server to to get paymentSessionData
+    aliPayRequestPaymentSessionData: data => callAPI('POST', '/payment-alipay', data),
+
+    //! Stripe web intent (request client secret)
+    stripeRequestClientSecret: data => callAPI('POST', '/stripe-web-payment-intent', data),
+
+    //! paypal payments
+    paypalCreateOrder: data => callAPI('POST', '/create-paypal-order', data),
+    paypalApproveOrder: data => callAPI('POST', '/paypalPayment', data),
+    // payplaApproveOrder: data => callAPI('POST', '/create-paypal-order', data)
   };
 };
