@@ -7,6 +7,7 @@ export const useConfig = () => {
   const API_URL = process.env.VUE_APP_API_URL;
   const paymentRedirectUrl = process.env.VUE_APP_PAYMENT_SUCCESS_URL;
   const paymentEnvornment = process.env.VUE_APP_PAYMENT_ENVIRONMENT;
+  const alipayPaymentNotifyUrl = process.env.VUE_APP_APIPAY_NOTIFY_URL;
   const stripePK = process.env.VUE_APP_STRIPE_CLIENT_ID;
   const paypalPK = process.env.VUE_APP_PAYPAL_CLIENT_ID;
   const headers = {
@@ -30,6 +31,7 @@ export const useConfig = () => {
     API_URL,
     headers,
     paymentRedirectUrl,
+    alipayPaymentNotifyUrl,
     paymentEnvornment,
     generateUUID,
     stripePK,

@@ -94,14 +94,12 @@
    import { computed } from 'vue';
 
    const { aliPayRequestPaymentSessionData, stripeRequestClientSecret, paypalCreateOrder} = useAPI();
-   const { paymentRedirectUrl, generateUUID, paymentEnvornment, stripePK, paypalPK} = useConfig();
+   const { paymentRedirectUrl,alipayPaymentNotifyUrl, generateUUID, paymentEnvornment, stripePK, paypalPK} = useConfig();
 
    const stripePromise = loadStripe(stripePK);
    const stripe = ref(null);
    const elements = ref(null);
    const cardElement = ref(null);
-
-   const selectedPayment = ref('');
    const initiatePaymentLoading = ref(false);
    const referenceOrderId = generateUUID();
    const paymentRequestId = generateUUID();
@@ -113,44 +111,7 @@
         return state.getCart;
    });
 
-   console.log('----PROCESS ENV-----', process.env);
-
-   console.log('----CART DETAILS----', cart.value);
-
-   const request = ref({
-                    productCode: "CASHIER_PAYMENT",
-                    paymentRequestId: paymentRequestId,
-                    order: {
-                        referenceOrderId: referenceOrderId,
-                        orderDescription: "xxxxx",
-                        orderAmount: {
-                            currency: "USD",
-                            value: "100"
-                        },
-                        buyer: {
-                            referenceBuyerId: user_.email
-                        }
-                    },
-                    paymentAmount: {
-                        currency: "USD",
-                        value: "100"
-                    },
-                    paymentMethod: {
-                        paymentMethodType: "CARD",
-                        paymentMethodMetaData: {
-                            paymentMethodRegion: "BR"
-                        }
-                    },
-                    paymentRedirectUrl: paymentRedirectUrl + 'package=1' ,
-                    paymentNotifyUrl: "https://nc.mgcores.com/apiv2/api/enrollment/payment-alipay-notify",
-                    paymentFactor: {
-                        isAuthorization: true
-                    },
-                    settlementStrategy: {
-                        settlementCurrency: "USD"
-                    }
-   });
-   
+   const selectedPayment = ref('');
 
    function togglePaymentOption(name) {
     if (name === selectedPayment.value) {
@@ -174,14 +135,50 @@
    }
 
    async function aliPayRequestPaymentSession() {
+        
+        const request = {
+                            productCode: "CASHIER_PAYMENT",
+                            paymentRequestId: paymentRequestId,
+                            order: {
+                                referenceOrderId: referenceOrderId,
+                                orderDescription: "xxxxx",
+                                orderAmount: {
+                                    currency: "USD",
+                                    value: cart.value.price
+                                },
+                                buyer: {
+                                    referenceBuyerId: user_.email
+                                }
+                            },
+                            paymentAmount: {
+                                currency: "USD",
+                                value: cart.value.price
+                            },
+                            paymentMethod: {
+                                paymentMethodType: "CARD",
+                                paymentMethodMetaData: {
+                                    paymentMethodRegion: "BR"
+                                }
+                            },
+                            paymentRedirectUrl: paymentRedirectUrl + 'package_id=' + cart.value.id + '&user_type=' + cart.value.user_type || 'Individual',
+                            paymentNotifyUrl: alipayPaymentNotifyUrl,
+                            paymentFactor: {
+                                isAuthorization: true
+                            },
+                            settlementStrategy: {
+                                settlementCurrency: "USD"
+                            }
+        }
+        
         initiatePaymentLoading.value = true;
+
         const checkoutApp = new AMSCashierPayment({
             environment: paymentEnvornment,
             locale: 'en_US',
             onEventCallback: (el) => { console.log('-----onEventCallback-----', el)}
         });
 
-        const results = await aliPayRequestPaymentSessionData(request.value);
+        const results = await aliPayRequestPaymentSessionData(request);
 
         initiatePaymentLoading.value = false;
 
@@ -196,9 +193,9 @@
 
    async function handleStripePayment() {
      const request = {
-        amount: 20,
+        amount: cart.value.price,
         currency: 'USD', 
-        package_id: 1
+        package_id: cart.value.id
      }
 
      const res = await stripeRequestClientSecret(request);
@@ -217,7 +214,7 @@
             if (result.error) {
                 showErrorMsg(result.error.message)
             } else {
-                location.href = paymentRedirectUrl + 'package=1'
+                location.href = paymentRedirectUrl + 'package_id=' + cart.value.id + '&user_type=' + cart.value.user_type || 'Individual'
             }
         }   else {
             showErrorMsg(res.message);
@@ -229,9 +226,9 @@
     async function payPalPayment() {
 
         const request = {
-            amount: 20,
+            amount: cart.value.price,
             currency: 'USD', 
-            package_id: 1
+            package_id: cart.value.id
         }
 
         await loadScript({
@@ -247,7 +244,7 @@
             },
             onApprove: (data, actions) => {
                 console.log(data, actions);
-                location.href = paymentRedirectUrl + 'package=1'
+                location.href = paymentRedirectUrl + 'package_id=' + cart.value.id + '&user_type=' + cart.value.user_type || 'Individual'
 
             },
             onError: (error) => {
