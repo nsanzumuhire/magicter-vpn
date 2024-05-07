@@ -17,6 +17,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       black: {
+        default: '#000000',
         500: '#4F5665',
         600: '#0B132A',
       },
@@ -31,6 +32,9 @@ module.exports = {
       red: {
         500: '#ef7691',
         100: '#fcefee',
+      },
+      blue: {
+        default: '#1677ff',
       },
       white: {
         300: '#F8F8F8',

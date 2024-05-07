@@ -13,7 +13,7 @@
                 </span> 
             </div>
             <PaymentInstruction v-if="selectedPayment === 'ALI'">
-                <ButtonPrimary :is-loading="selectedPayment === 'ALI' && initiatePaymentLoading" @click="initiatePayment('ALI')" :classes="' sm:px-2 bg-[#1677ff] hover:bg-[#1677ff] opacity-75'"> <span class="text-xs"> Continue to Ali pay USD {{ cart.price }}</span> </ButtonPrimary>
+                <ButtonPrimary :is-loading="selectedPayment === 'ALI' && initiatePaymentLoading" @click="initiatePayment('ALI')" :classes="' sm:px-2 bg-blue-default hover:bg-blue-default hover:opacity-75'"> <span class="text-xs"> Continue to Ali pay USD {{ cart.price }}</span> </ButtonPrimary>
             </PaymentInstruction>
         </div>
         
@@ -68,7 +68,7 @@
             </div>
             
             <PaymentInstruction v-if="selectedPayment === 'CRYPTOMUS'">
-                <ButtonPrimary :is-loading="selectedPayment === 'CRYPTOMUS' && initiatePaymentLoading" @click="initiatePayment('CRYPTOMUS')" :classes="' sm:px-2 bg-[#000] hover:bg-black-500'"> <span class="text-xs"> Go to cryptomus USDT {{ cart.price }}</span> </ButtonPrimary>
+                <ButtonPrimary :is-loading="selectedPayment === 'CRYPTOMUS' && initiatePaymentLoading" @click="initiatePayment('CRYPTOMUS')" :classes="' sm:px-2 bg-black-default hover:bg-black-default'"> <span class="text-xs"> Go to cryptomus USDT {{ cart.price }}</span> </ButtonPrimary>
             </PaymentInstruction>
         </div>
     </div>
@@ -143,7 +143,7 @@
         initiatePaymentLoading.value = false;
         if (results?.statusCode === 200) {
             const { result } = results.data;
-            location.href = result.url;
+            window.open(result.url);
         }  else {
             showErrorMsg(results.message);
         }
@@ -187,12 +187,15 @@
             onEventCallback: (el) => { console.log('-----onEventCallback-----', el)}
         });
 
+        console.log(checkoutApp)
+
         const results = await aliPayRequestPaymentSessionData(request);
         initiatePaymentLoading.value = false;
         if (results?.statusCode === 200) {
-            await checkoutApp.createComponent({
-                sessionData: results.data.paymentSessionData
-            });
+            // await checkoutApp.createComponent({
+            //     sessionData: results.data.paymentSessionData
+            // });
+            window.open(results.data.paymentSessionData.url);
         }  else {
             showErrorMsg(results.message)
         }             
