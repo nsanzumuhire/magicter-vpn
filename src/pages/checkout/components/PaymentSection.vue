@@ -1,8 +1,8 @@
 <template>
 
     <div class="flex flex-col gap-4 w-full">
-        <div @click="togglePaymentOption('ALI')" :class="{'border border-purple-500': selectedPayment === 'ALI'}" class="flex flex-col cursor-pointer bg-white-500 rounded-xl border border-gray-500 px-6 py-3 hover:border hover:border-purple-500">
-            <div class="flex items-center justify-between">
+        <div :class="{'border border-purple-500': selectedPayment === 'ALI'}" class="flex flex-col cursor-pointer bg-white-500 rounded-xl border border-gray-500 px-6 py-3 hover:border hover:border-purple-500">
+            <div @click="togglePaymentOption('ALI')" class="flex items-center justify-between">
                 <div class="flex gap-2 items-center">
                     <p class="text-sm"> Global Ali pay</p>
                     <img src="../../../assets/Icon/alipay.svg" class="h-14 w-auto"/>
@@ -13,12 +13,12 @@
                 </span> 
             </div>
             <PaymentInstruction v-if="selectedPayment === 'ALI'">
-                <ButtonPrimary :is-loading="selectedPayment === 'ALI' && initiatePaymentLoading" @click.prevent ="initiatePayment('ALI')" :classes="' sm:px-2'"> <span class="text-xs"> Continue to Ali pay</span> </ButtonPrimary>
+                <ButtonPrimary :is-loading="selectedPayment === 'ALI' && initiatePaymentLoading" @click="initiatePayment('ALI')" :classes="' sm:px-2'"> <span class="text-xs"> Continue to Ali pay</span> </ButtonPrimary>
             </PaymentInstruction>
         </div>
         
-        <div @click="togglePaymentOption('PAYPAL')" :class="{'border border-purple-500': selectedPayment === 'PAYPAL'}" class="flex flex-col cursor-pointer bg-white-500 rounded-xl border border-gray-500 px-6 py-3  hover:border hover:border-purple-500">
-            <div class="flex items-center justify-between">
+        <div :class="{'border border-purple-500': selectedPayment === 'PAYPAL'}" class="flex flex-col cursor-pointer bg-white-500 rounded-xl border border-gray-500 px-6 py-3  hover:border hover:border-purple-500">
+            <div @click="togglePaymentOption('PAYPAL')" class="flex items-center justify-between">
                 <div class="flex gap-2 items-center">
                 <p class="text-sm"> Paypal</p>
                 <img src="../../../assets/Icon/paypal.svg" class="h-14 w-auto"/>
@@ -29,16 +29,14 @@
                 <ChevronRightIcon v-else class="h-4 w-4"/>   
             </span>
             </div>
-            
-            <PaymentInstruction v-if="selectedPayment === 'PAYPAL'">
-                <ButtonPrimary :is-loading="selectedPayment === 'PAYPAL' && initiatePaymentLoading" @click.prevent ="payPalPayment"  :classes="' sm:px-2'"> <span class="text-xs"> Continue to paypal</span> </ButtonPrimary>
-            </PaymentInstruction>
-
-            <div id="paypal-button-container"></div>
+            <template :class="{'hidden': selectedPayment !== 'PAYPAL', 'flex flex-col gap-4': selectedPayment === 'PAYPAL'}">
+                <div id="paypal-button-container"></div>
+                <PaymentInstruction :is-full="true"/>
+            </template>
         </div>
 
-        <div @click="togglePaymentOption('STRIPE')" :class="{'border border-purple-500': selectedPayment === 'STRIPE'}" class="flex flex-col cursor-pointer bg-white-500 rounded-xl border border-gray-500 px-6 py-3 hover:border hover:border-purple-500">
-            <div class="flex items-center justify-between" :class="{'mb-6': selectedPayment === 'STRIPE'}">
+        <div :class="{'border border-purple-500': selectedPayment === 'STRIPE'}" class="flex flex-col cursor-pointer bg-white-500 rounded-xl border border-gray-500 px-6 py-3 hover:border hover:border-purple-500">
+            <div @click="togglePaymentOption('STRIPE')" class="flex items-center justify-between" :class="{'mb-6': selectedPayment === 'STRIPE'}">
                 <div class="flex gap-2 items-center">
                 <p class="text-sm"> Stripe</p>
                 <img src="../../../assets/Icon/stripe.svg" class="h-14 w-auto"/>
@@ -56,8 +54,8 @@
                 <PaymentInstruction :is-full="true"/>
             </template>
         </div>
-        <div @click="togglePaymentOption('CRYPTOMUS')" :class="{'border border-purple-500': selectedPayment === 'CRYPTOMUS'}"  class="flex flex-col cursor-pointer bg-white-500 rounded-xl border border-gray-500 px-6 py-3 hover:border hover:border-purple-500">
-            <div class="flex items-center justify-between">
+        <div :class="{'border border-purple-500': selectedPayment === 'CRYPTOMUS'}"  class="flex flex-col cursor-pointer bg-white-500 rounded-xl border border-gray-500 px-6 py-3 hover:border hover:border-purple-500">
+            <div @click="togglePaymentOption('CRYPTOMUS')" class="flex items-center justify-between">
                 <div class="flex gap-2 items-center">
                 <p class="text-sm"> Cryptocurrency (USTD)</p>
                 <img src="../../../assets/Icon/cryptomus.svg" class="h-14 w-24"/>
@@ -122,12 +120,9 @@
    }
    
    async function initiatePayment(type) {
-    togglePaymentOption(type);
     switch(type) {
         case 'ALI':
-            aliPayRequestPaymentSession()
-            break;
-        case 'STRIPE':
+            aliPayRequestPaymentSession();
             break;
         default:
             break
@@ -135,7 +130,7 @@
    }
 
    async function aliPayRequestPaymentSession() {
-        
+        initiatePaymentLoading.value = true;
         const request = {
                             productCode: "CASHIER_PAYMENT",
                             paymentRequestId: paymentRequestId,
@@ -169,9 +164,6 @@
                                 settlementCurrency: "USD"
                             }
         }
-        
-        initiatePaymentLoading.value = true;
-
         const checkoutApp = new AMSCashierPayment({
             environment: paymentEnvornment,
             locale: 'en_US',
@@ -179,9 +171,7 @@
         });
 
         const results = await aliPayRequestPaymentSessionData(request);
-
         initiatePaymentLoading.value = false;
-
         if (results?.statusCode === 200) {
             await checkoutApp.createComponent({
                 sessionData: results.data.paymentSessionData
@@ -249,12 +239,14 @@
             },
             onError: (error) => {
                 showErrorMsg('Error creating PayPal order:', error);
+            },
+            style: {
+                layout: 'horizontal' // Customize display type here (e.g., 'horizontal', 'vertical', 'pill')
             }
         }).render('#paypal-button-container');
     }
 
-    
-    onMounted(async () => {
+    async function mountStripe() {
         const appearance = {
                 theme: 'stripe',
                 variables: {
@@ -270,6 +262,11 @@
         elements.value = stripe.value.elements({appearance});
         cardElement.value = elements.value.create('card'); 
         cardElement.value.mount('#card-element');
+    }
+    
+    onMounted(async () => {
+        mountStripe();
+        payPalPayment();
     });
 
  </script>
