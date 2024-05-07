@@ -47,6 +47,9 @@ export const useAPI = () => {
     paypalCreateOrder: data => callAPI('POST', '/create-paypal-order', data),
     paypalApproveOrder: data => callAPI('POST', '/paypalPayment', data),
 
+    //! usdt payments
+    paymentUSDT: data => callAPI('POST', '/paymentUSDT', data),
+
     //! payment success [USER]
     userPaymentSuccess: data => callAPI('POST', '/user-subscription-success', data),
     userTypePaymentSuccess: data =>

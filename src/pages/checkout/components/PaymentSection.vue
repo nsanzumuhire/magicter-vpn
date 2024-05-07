@@ -13,7 +13,7 @@
                 </span> 
             </div>
             <PaymentInstruction v-if="selectedPayment === 'ALI'">
-                <ButtonPrimary :is-loading="selectedPayment === 'ALI' && initiatePaymentLoading" @click="initiatePayment('ALI')" :classes="' sm:px-2'"> <span class="text-xs"> Continue to Ali pay</span> </ButtonPrimary>
+                <ButtonPrimary :is-loading="selectedPayment === 'ALI' && initiatePaymentLoading" @click="initiatePayment('ALI')" :classes="' sm:px-2 bg-[#1677ff] hover:bg-[#1677ff] opacity-75'"> <span class="text-xs"> Continue to Ali pay USD {{ cart.price }}</span> </ButtonPrimary>
             </PaymentInstruction>
         </div>
         
@@ -57,7 +57,7 @@
         <div :class="{'border border-purple-500': selectedPayment === 'CRYPTOMUS'}"  class="flex flex-col cursor-pointer bg-white-500 rounded-xl border border-gray-500 px-6 py-3 hover:border hover:border-purple-500">
             <div @click="togglePaymentOption('CRYPTOMUS')" class="flex items-center justify-between">
                 <div class="flex gap-2 items-center">
-                <p class="text-sm"> Cryptocurrency (USTD)</p>
+                <p class="text-sm"> Cryptocurrency (USTD) </p>
                 <img src="../../../assets/Icon/cryptomus.svg" class="h-14 w-24"/>
                 
             </div>    
@@ -68,7 +68,7 @@
             </div>
             
             <PaymentInstruction v-if="selectedPayment === 'CRYPTOMUS'">
-                <ButtonPrimary :classes="' sm:px-2'"> <span class="text-xs"> Continue to cryptomus</span> </ButtonPrimary>
+                <ButtonPrimary :is-loading="selectedPayment === 'CRYPTOMUS' && initiatePaymentLoading" @click="initiatePayment('CRYPTOMUS')" :classes="' sm:px-2 bg-[#000] hover:bg-black-500'"> <span class="text-xs"> Go to cryptomus USDT {{ cart.price }}</span> </ButtonPrimary>
             </PaymentInstruction>
         </div>
     </div>
@@ -91,7 +91,7 @@
    import { useRouterStore } from '@/stores/router.state'
    import { computed } from 'vue';
 
-   const { aliPayRequestPaymentSessionData, stripeRequestClientSecret, paypalCreateOrder} = useAPI();
+   const { aliPayRequestPaymentSessionData, stripeRequestClientSecret, paypalCreateOrder, paymentUSDT} = useAPI();
    const { paymentRedirectUrl,alipayPaymentNotifyUrl, generateUUID, paymentEnvornment, stripePK, paypalPK} = useConfig();
 
    const stripePromise = loadStripe(stripePK);
@@ -124,9 +124,30 @@
         case 'ALI':
             aliPayRequestPaymentSession();
             break;
+        case 'CRYPTOMUS':
+            criptomusPayment();
+            break;
         default:
             break
     }
+   }
+
+   async function criptomusPayment() {
+    initiatePaymentLoading.value = true;
+    const request = {
+        amount: cart.value.price.toString(),
+        package_id: cart.value.id.toString()
+     }
+
+     const results = await paymentUSDT(request);
+        initiatePaymentLoading.value = false;
+        if (results?.statusCode === 200) {
+            const { result } = results.data;
+            location.href = result.url;
+        }  else {
+            showErrorMsg(results.message);
+        }
+        
    }
 
    async function aliPayRequestPaymentSession() {
@@ -241,7 +262,7 @@
                 showErrorMsg('Error creating PayPal order:', error);
             },
             style: {
-                layout: 'horizontal' // Customize display type here (e.g., 'horizontal', 'vertical', 'pill')
+                layout: 'horizontal'
             }
         }).render('#paypal-button-container');
     }
