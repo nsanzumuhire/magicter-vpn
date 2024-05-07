@@ -10,11 +10,20 @@ import DownloadPage from './pages/DownloadPage.vue';
 import TopUpCenterPage from './pages/dashboard/TopUpCenterPage.vue';
 import { useRouterStore } from './stores/router.state';
 import SimpleLayout from './layouts/SimpleLayout.vue';
+import MobileLayoutVue from './layouts/MobileLayout.vue';
 
 const routes = [
   {
     path: '/',
     component: DownloadPage,
+  },
+  {
+    path: '/mobile',
+    component: MobileLayoutVue,
+    children: [
+      { path: 'topup', component: () => import('./pages/mobile/MobileTopup.vue') },
+      { path: 'checkout', component: () => import('./pages/mobile/MobileCheckout.vue') },
+    ],
   },
   {
     path: '/auth',

@@ -4,6 +4,9 @@ import { v4 as UUID } from 'uuid';
 
 export const useConfig = () => {
   const { token } = useAuth();
+
+  console.log('tokennnnn', token);
+
   const API_URL = process.env.VUE_APP_API_URL;
   const paymentRedirectUrl = process.env.VUE_APP_PAYMENT_SUCCESS_URL;
   const paymentEnvornment = process.env.VUE_APP_PAYMENT_ENVIRONMENT;

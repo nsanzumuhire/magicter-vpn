@@ -1,12 +1,15 @@
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { useAPI } from './useAPI';
 
 export function useAuth() {
+  const route = useRoute();
+  const { token: token__ } = route.query;
   const router = useRouter();
-  const token = ref(localStorage.getItem('token'));
+  const token = ref(localStorage.getItem('token') || token__);
   const user = ref(localStorage.getItem('user'));
   const deviceId = ref(12343444);
+  const isMobile = !!token__;
 
   const setToken = newToken => {
     token.value = newToken;
@@ -42,6 +45,7 @@ export function useAuth() {
   return {
     user,
     token,
+    isMobile,
     deviceId,
     logout,
     setToken,

@@ -39,7 +39,7 @@
                         <div class="flex min-h-[100px] w-full justify-center items-center">
                             <SpinnerLoader :full-loadder="true" />
                         </div>
-                </template>
+                    </template>
             </PopupModal>
         </div>
 </template>
@@ -64,7 +64,7 @@ const {
     individual,
     enterprise,
     saveCart,
-  } = usePackages()
+} = usePackages()
 
 function togglePopup() {
     isOpen.value = !isOpen.value;

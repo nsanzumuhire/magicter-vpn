@@ -147,7 +147,6 @@
         }  else {
             showErrorMsg(results.message);
         }
-        
    }
 
    async function aliPayRequestPaymentSession() {
@@ -157,13 +156,13 @@
                             paymentRequestId: paymentRequestId,
                             order: {
                                 referenceOrderId: referenceOrderId,
-                                orderDescription: "xxxxx",
+                                orderDescription: "Magicter Service",
                                 orderAmount: {
                                     currency: "USD",
                                     value: cart.value.price
                                 },
                                 buyer: {
-                                    referenceBuyerId: user_.email
+                                    referenceBuyerId: user_?.email || 'Mobile user'
                                 }
                             },
                             paymentAmount: {
@@ -172,9 +171,6 @@
                             },
                             paymentMethod: {
                                 paymentMethodType: "CARD",
-                                paymentMethodMetaData: {
-                                    paymentMethodRegion: "BR"
-                                }
                             },
                             paymentRedirectUrl: paymentRedirectUrl + 'package_id=' + cart.value.id + '&user_type=' + cart.value.user_type || 'Individual',
                             paymentNotifyUrl: alipayPaymentNotifyUrl,
