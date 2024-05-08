@@ -1,24 +1,25 @@
 <template>
-    <div class="flex relative flex-col sm:h-full xl:h-screen">
-      
-    <!-- side nav -->
+    <div class="flex min-h-screen relative flex-col sm:h-full xl:h-screen">
+        <!-- side nav -->
+        <div v-if="isSidebarOpen" class="absolute left-0 z-20">
+          <SidebarSection :show-header-icon="false"/>
+        </div>
+        <!-- end of side nav -->
 
-    <div v-if="isSidebarOpen" class="absolute left-0 z-20">
-      <SidebarSection :show-header-icon="false"/>
-    </div>
+        <div class="flex-1">
+          <!-- header nav -->
+          <HeaderSection></HeaderSection>
+          <!-- End of header  -->
+          <div class="mt-24">
+          <!-- Hero -->
+          <HeroSection></HeroSection>
+          <!-- End of Hero -->
+          </div>
+        </div>
 
-    <!-- end of side nav -->
-    <!-- header nav -->
-    <HeaderSection></HeaderSection>
-    <!-- End of header  -->
-    <div class="mt-24">
-    <!-- Hero -->
-    <HeroSection></HeroSection>
-    <!-- End of Hero -->
-    </div>
-    <!-- Footer -->
-    <FooterSection></FooterSection>
-    <!-- End of Footer  -->
+        <!-- Footer -->
+        <FooterSection></FooterSection>
+        <!-- End of Footer  -->
     </div>
   </template>
   

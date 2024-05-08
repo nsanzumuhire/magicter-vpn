@@ -2,12 +2,12 @@
         <div class="w-full flex flex-col justify-center items-center gap-3 mt-20">
             
             <h3
-              class="text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-relaxed"
+              class="text-2xl lg:text-4xl font-medium text-center text-black-600 leading-relaxed"
             >
               Download Magicter VPN for your platform
             </h3>
             <p
-              class="leading-normal w-10/12 sm:w-7/12 lg:w-6/12 mx-auto my-2 text-center"
+              class="leading-normal w-10/12 sm:w-7/12 lg:w-6/12 mx-auto my-2 text-center text-sm lg:text-base"
             >
              choose the appropriate application match the package you purchased.
             </p>

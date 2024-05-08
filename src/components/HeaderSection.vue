@@ -5,14 +5,14 @@
             <div class="col-start-1 col-end-2 flex gap-2 items-center text-black-500">
               <Bars3Icon v-if="!isSidebarOpen && token" @click="handleSideBar" class="h-8 w-8 cursor-pointer"/>
               <img src="../assets/Logo.png" class="h-6 w-auto"  alt="Logo">
-              <h2 class="text-black-500 text-base font-extrabold">Magicter 
+              <h2 class="text-black-500 text-base font-extrabold hidden md:flex">Magicter 
                 <span class="text-purple-500">VPN</span>
                 <span class="font-light px-2 opacity-75" v-if="$route.path === '/checkout'">CHECKOUT</span>
               </h2>
             </div>
             <div class="col-start-10 col-end-12 font-medium flex justify-end items-center text-sm">
                 <template v-if="!token">
-                  <router-link to="/auth/signin" class="cursor-pointer text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-purple-500 font-bold transition-all">
+                  <router-link to="/auth/signin" class="cursor-pointer text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-purple-500 font-bold transition-all text-xs md:text-sm">
                   Sign In
                 </router-link>
                 <ButtonPrimary :is-full="false" :link="'/auth/signup'" :classes="defaultBtnFont">Sign Up</ButtonPrimary>
@@ -54,7 +54,7 @@ import dropdownMenu from '../molecules/DropdownMenu';
 const { token, user, logout } = useAuth();
 const user_  = JSON.parse(user.value);
 const scrollActive = ref(false);
-const defaultBtnFont = 'font-bold';
+const defaultBtnFont = 'font-bold text-xs md:text-sm ';
 
 const handleScroll = () => {
   scrollActive.value = window.scrollY > 20;

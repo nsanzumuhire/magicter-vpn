@@ -4,7 +4,9 @@ import { useAPI } from './useAPI';
 
 export function useAuth() {
   const route = useRoute();
-  const { token: token__ } = route.query;
+
+  const { token: token__ } = route?.query ?? { token: null };
+
   const router = useRouter();
   const token = ref(localStorage.getItem('token') || token__);
   const user = ref(localStorage.getItem('user'));

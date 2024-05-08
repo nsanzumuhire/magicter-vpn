@@ -1,6 +1,6 @@
 <template>
     <div class="modal fade" :class="{ show: isShow }">
-      <div class="dialog">
+      <div class="mx-0 my-20 w-full md:max-w-screen-lg md:mx-auto lg:w-[80] 2xl:w-[60]">
         <div ref="modalRef" class="content flex flex-col gap-2 w-full">
           <div class="flex w-full items-end justify-end">
             <XMarkIcon class="h-5 w-5 cursor-pointer" @click="onClose"/>
@@ -70,11 +70,6 @@
     
     .fade {
         transition: opacity 0.2s linear;
-    }
-    
-    .dialog {
-        width: 60%;
-        margin: 5rem auto;
     }
     
     .content {

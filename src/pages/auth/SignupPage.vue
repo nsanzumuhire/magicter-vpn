@@ -11,7 +11,7 @@
                 
             </form>
             <div class="flex flex-col w-full items-center justify-center">
-                <p class="text-xs text-black-100">
+                <p class="text-xs text-black-100 text-center">
                     By signing up, you agree with our <span class="underline">terms of service</span> and <span class="underline">privacy policy</span>.
                 </p>
             </div>
