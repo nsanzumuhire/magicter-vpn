@@ -37,10 +37,11 @@
             </div>
           </div>
         </div>
-  
-  <PopupModal v-if="modalOpen" @close="onClose">
-    <DownloadSection :platform="selectedPlatform" :default-class="''"></DownloadSection>
-  </PopupModal>
+        <transition>
+          <PopupModal v-if="modalOpen" @close="onClose">
+            <DownloadSection :platform="selectedPlatform" :default-class="''"></DownloadSection>
+          </PopupModal>
+        </transition>
     </div>
 </template>
   

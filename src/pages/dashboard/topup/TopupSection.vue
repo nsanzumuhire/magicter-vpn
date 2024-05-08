@@ -7,12 +7,12 @@
             <div class="flex flex-col w-full gap-3">
 
                 <h3
-                  class="text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-relaxed"
+                  class="text-2xl lg:text-4xl  lg:text-4xl font-medium text-black-600 leading-relaxed"
                 >
                   Choose Your Plan
                 </h3>
                 <p
-                  class="leading-normal w-10/12 sm:w-7/12 lg:w-6/12 mx-auto my-2 text-center"
+                  class="leading-normal w-10/12 sm:w-7/12 lg:w-6/12 mx-auto my-2 text-center text-sm lg:text-base"
                 >
                   Let's choose the package that is best for you and explore it happily and cheerfully.
                 </p>

@@ -6,7 +6,9 @@
                     <img src="../assets/Logo.png" class="h-8 w-auto"  alt="Logo">
                     <h2 class="text-black-500 text-lg font-extrabold">Magicter <span class="text-purple-500">VPN</span></h2>
                 </router-link> 
-                <router-view />
+                <transition>
+                            <router-view />
+                </transition>
             </main>
         </div>
         <FooterSmallSection/>
